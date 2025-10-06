@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go build:*)",
+      "Bash(curl:*)",
+      "Bash(go mod:*)",
+      "Bash(./consensus-visualizer-backend)",
+      "Bash(PORT=8081 ./consensus-visualizer-backend)",
+      "Bash(PORT=8083 ./consensus-visualizer-backend)",
+      "Bash(PORT=8084 ./consensus-visualizer-backend)",
+      "Bash(PORT=8085 ./consensus-visualizer-backend)",
+      "Bash(PORT=8086 ./consensus-visualizer-backend)",
+      "Bash(PORT=8087 ./consensus-visualizer-backend)"
+    ],
+    "additionalDirectories": [
+      "/Users/denver/zsystm"
+    ]
+  }
+}
