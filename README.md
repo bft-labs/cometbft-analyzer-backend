@@ -198,3 +198,6 @@ curl -s 'localhost:8080/v1/simulations/<simulationId>/metrics/latency/pairwise?f
 - If you extend per-simulation collections or metrics, add endpoints and document them here.
 - PRs improving safety, performance, and observability are welcome.
 
+## License
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file for details.
