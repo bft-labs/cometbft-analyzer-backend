@@ -61,7 +61,7 @@ func GetSimulationPairLatencyHandler(client *mongo.Client, simulationsColl *mong
 // GetSimulationBlockLatencyTimeSeriesHandler returns per-block latency time-series for a specific simulation
 func GetSimulationBlockLatencyTimeSeriesHandler(client *mongo.Client, simulationsColl *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "consensus_events"); ok {
+		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "tracer_events"); ok {
 			handler := GetBlockLatencyTimeSeriesHandler(coll)
 			handler(c)
 		}
@@ -71,7 +71,7 @@ func GetSimulationBlockLatencyTimeSeriesHandler(client *mongo.Client, simulation
 // GetSimulationLatencyStatsHandler returns histogram and jitter stats for a specific simulation
 func GetSimulationLatencyStatsHandler(client *mongo.Client, simulationsColl *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "consensus_events"); ok {
+		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "tracer_events"); ok {
 			handler := GetLatencyStatsHandler(coll)
 			handler(c)
 		}
@@ -81,7 +81,7 @@ func GetSimulationLatencyStatsHandler(client *mongo.Client, simulationsColl *mon
 // GetSimulationMessageSuccessRateHandler returns send vs receive counts and delivery ratio for a specific simulation
 func GetSimulationMessageSuccessRateHandler(client *mongo.Client, simulationsColl *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "consensus_events"); ok {
+		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "tracer_events"); ok {
 			handler := GetMessageSuccessRateHandler(coll)
 			handler(c)
 		}
@@ -91,7 +91,7 @@ func GetSimulationMessageSuccessRateHandler(client *mongo.Client, simulationsCol
 // GetSimulationBlockEndToEndLatencyHandler returns end-to-end consensus latency per block height for a specific simulation
 func GetSimulationBlockEndToEndLatencyHandler(client *mongo.Client, simulationsColl *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "consensus_events"); ok {
+		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "tracer_events"); ok {
 			handler := GetBlockEndToEndLatencyHandler(coll)
 			handler(c)
 		}
@@ -141,7 +141,7 @@ func GetSimulationNetworkLatencyOverviewHandler(client *mongo.Client, simulation
 // GetSimulationConsensusEventsHandler returns consensus events for a specific simulation
 func GetSimulationConsensusEventsHandler(client *mongo.Client, simulationsColl *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "consensus_events"); ok {
+		if coll, ok := validateSimulationAndGetDB(c, client, simulationsColl, "tracer_events"); ok {
 			handler := GetConsensusEventsHandler(coll)
 			handler(c)
 		}

@@ -586,11 +586,11 @@ func ProcessSimulationHandler(collection *mongo.Collection) gin.HandlerFunc {
 			processSimulationAsync(collection, simulation)
 			processingTime := time.Since(startTime).Milliseconds()
 
-			// Get simulation directory for cometbft-log-parser
+			// Get simulation directory for cometbft-log-etl
 			simulationDir := utils.GetSimulationDir(simulation.UserID, simulation.ProjectID, simulation.ID)
 
-			// Execute cometbft-log-parser with simulation ID
-			cmd := exec.Command("cometbft-log-parser", "-dir", simulationDir, "-simulation", simulation.ID.Hex())
+			// Execute cometbft-log-etl with simulation ID
+			cmd := exec.Command("cometbft-log-etl", "-dir", simulationDir, "-simulation", simulation.ID.Hex())
 			err := cmd.Run()
 
 			var processingResult types.ProcessingResult
@@ -660,11 +660,11 @@ func processSimulationLogs(collection *mongo.Collection, simulation types.Simula
 	}
 	collection.UpdateOne(context.Background(), bson.M{"_id": simulation.ID}, update)
 
-	// Get simulation directory for cometbft-log-parser
+	// Get simulation directory for cometbft-log-etl
 	simulationDir := utils.GetSimulationDir(simulation.UserID, simulation.ProjectID, simulation.ID)
 
-	// Execute cometbft-log-parser with simulation ID
-	cmd := exec.Command("cometbft-log-parser", "-dir", simulationDir, "-simulation", simulation.ID.Hex())
+	// Execute cometbft-log-etl with simulation ID
+	cmd := exec.Command("cometbft-log-etl", "-dir", simulationDir, "-simulation", simulation.ID.Hex())
 	err := cmd.Run()
 
 	var processingResult types.ProcessingResult

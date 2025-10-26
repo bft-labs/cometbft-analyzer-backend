@@ -16,7 +16,7 @@ Note: This project is under active development. APIs and schemas may evolve.
 - Requirements:
   - Go 1.21+
   - MongoDB (local or remote)
-  - cometbft-log-etl binary on PATH as `cometbft-log-parser`
+  - cometbft-log-etl binary on PATH as `cometbft-log-etl`
 
 1) Run MongoDB (defaults to `mongodb://localhost:27017`).
 
@@ -25,8 +25,8 @@ Note: This project is under active development. APIs and schemas may evolve.
 ```bash
 git clone https://github.com/bft-labs/cometbft-log-etl
 cd cometbft-log-etl
-go build -o cometbft-log-parser .
-mv cometbft-log-parser /usr/local/bin/  # or add to your PATH
+go build -o cometbft-log-etl .
+mv cometbft-log-etl /usr/local/bin/  # or add to your PATH
 ```
 
 3) Start the backend:
@@ -71,7 +71,7 @@ File storage (local filesystem):
 Processing pipeline:
 1) Create a simulation (optionally upload logs in the same request)
 2) Upload log files (multipart)
-3) Trigger processing (`POST /v1/simulations/:id/process`) which runs `cometbft-log-parser -dir <sim_dir> -simulation <sim_id>`
+3) Trigger processing (`POST /v1/simulations/:id/process`) which runs `cometbft-log-etl -dir <sim_dir> -simulation <sim_id>`
 4) Query metrics and events from the per-simulation database
 
 ## API Overview
@@ -186,8 +186,8 @@ curl -s 'localhost:8080/v1/simulations/<simulationId>/metrics/latency/pairwise?f
 
 ## Notes and Tips
 
-- Ensure `cometbft-log-parser` is available on PATH for processing. The backend calls it with:
-  `cometbft-log-parser -dir <simulation_dir> -simulation <simulation_id>`
+- Ensure `cometbft-log-etl` is available on PATH for processing. The backend calls it with:
+  `cometbft-log-etl -dir <simulation_dir> -simulation <simulation_id>`
 - Frontend consumers should honor rate limits and use `from`/`to` windows for heavy queries.
 - The events API supports cursor pagination (`cursor` and `before`) and segment offsets for large timelines.
 - If you adjust CORS origins or rate limits, update code in `middleware/`.
